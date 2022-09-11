@@ -633,6 +633,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Light switch",
+                    "type": "Button",
+                    "id": "c13d2846-da5f-4383-aaac-b0357afc2cac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -943,6 +952,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "558923f0-813d-4048-89f1-4212268ab208",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Light switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

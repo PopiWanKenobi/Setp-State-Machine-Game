@@ -3,7 +3,14 @@ guid: 1fdf791c7baf615408a548bf8f76c282
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_InteractionManager: {instanceID: 0}
+  - m_CustomReticle: {instanceID: 0}
+  - m_AttachTransform: {instanceID: 0}
+  - lightActionReference1: {fileID: -315708920520414436, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  - lightActionReference2: {fileID: -50757495835641403, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
