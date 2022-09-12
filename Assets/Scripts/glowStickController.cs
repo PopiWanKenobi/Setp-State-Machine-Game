@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class glowStickController : XRGrabInteractable
 {
-
+    public bool active;
     public bool beingHeld;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
@@ -32,8 +32,8 @@ public class glowStickController : XRGrabInteractable
 
     void LightSwitcher()
     {
-
-            GetComponent<Light>().enabled = true;
+        active = true;
+            GetComponent<Light>().enabled = enabled;
         
     }
 }

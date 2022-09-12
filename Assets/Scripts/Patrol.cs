@@ -3,7 +3,12 @@ using UnityEngine.AI;
 
 public class Patrol : State
 {
-    int currentIndex = -1;
+    public GameObject checkpoint;
+    public GameObject glowObj;
+    public Light glowStick;
+
+
+
 
 
     public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
@@ -16,31 +21,23 @@ public class Patrol : State
 
     public override void Enter()
     {
-        currentIndex = 0;
-        //anim.SetTrigger("isWalking");
+        glowObj = GameObject.FindGameObjectWithTag("light");
+        glowStick = glowObj.GetComponent<Light>();
+        checkpoint = GameObject.FindGameObjectWithTag("Player");
+
         Debug.Log("I'm in patrol right now");
         base.Enter();
     }
     public override void Update()
     {
-        //do whatever you want to do for the patrol
-        //Debug.Log("I'm supposed to be walking around");
+        agent.SetDestination(checkpoint.transform.position);
 
-
-        /*
-        if (agent.remainingDistance < 1)
+        if (glowStick.isActiveAndEnabled == true)
         {
-            if (currentIndex >= GameEnviornment.Singleton.Checkpoints.Count - 1) //this is checking if theres a path to patrol
-            {
-                currentIndex = 0;
-            }
-            else
-            {
-                currentIndex++;
-            }
-            agent.SetDestination(GameEnviornment.Singleton.Checkpoints[currentIndex].transform.position);
-        }*/
-        agent.SetDestination(new Vector3(0,0,0));
+            nextState = new Attack(npc, agent, anim, player);
+            stage = EVENT.EXIT;
+        }
+
 
     }
     public override void Exit()
