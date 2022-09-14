@@ -5,6 +5,8 @@ public class Attack : State
 {
     
     public GameObject glowObj;
+    public GameObject lightDecider;
+    public DecideLight light;
 
     public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
         : base(_npc, _agent, _anim, _player)
@@ -16,22 +18,27 @@ public class Attack : State
 
     public override void Enter()
     {
-        glowObj = GameObject.FindGameObjectWithTag("light");
+        lightDecider = GameObject.FindGameObjectWithTag("lightTracker");
+        light = lightDecider.GetComponent<DecideLight>();
+        // glowObj = GameObject.FindGameObjectWithTag("light");
         Debug.Log("I'm in Attack right now");
         base.Enter();
     }
     public override void Update()
     {
-
-        agent.SetDestination(glowObj.transform.position);
-        
-        if((agent.transform.position - glowObj.transform.position).magnitude <1)
+        if (light.target != null)
         {
-            glowObj.GetComponent<Light>().enabled = false;
-            nextState = new Idle(npc, agent, anim, player);
-            stage = EVENT.EXIT;
+            agent.SetDestination(light.target.transform.position);
 
+            if ((agent.transform.position - light.target.transform.position).magnitude < 1)
+            {
+                light.target.GetComponent<Light>().enabled = false;
+                nextState = new Idle(npc, agent, anim, player);
+                stage = EVENT.EXIT;
+
+            }
         }
+
 
     }
     public override void Exit()
