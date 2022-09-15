@@ -2,21 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class ILightChecker : IComparable
+public class ILightChecker : MonoBehaviour
 {
-    public DecideLight listChecker;
-    public float Priority { get; set; }
+    public float Intensity { get; set; }
+    public List<GameObject> lightList;
 
-    public ILightChecker()
+    public int CompareLights()
     {
-        foreach (GameObject item in listChecker.onLights)
-        {
-            Priority = item.GetComponent<Light>().intensity;
-        }
+        return 0;
+        //return Intensity.CompareTo(Intensity);
     }
-
-    public int CompareTo(ILightChecker other)
-    {
-        return Priority.CompareTo(Priority);
-    }
-}*/
+}

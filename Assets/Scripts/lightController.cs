@@ -31,10 +31,7 @@ public class lightController : XRGrabInteractable
     {
         lightActionReference1.action.performed += LightSwitcher;
         lightActionReference2.action.performed += LightSwitcher;
-        if (active == true)
-        {
-            Debug.Log("Position to be sent to enemy:" + transform.position);
-        }
+
     }
 
     void LightSwitcher(InputAction.CallbackContext obj)

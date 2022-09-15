@@ -20,23 +20,23 @@ public class Attack : State
     {
         lightDecider = GameObject.FindGameObjectWithTag("lightTracker");
         light = lightDecider.GetComponent<DecideLight>();
-        // glowObj = GameObject.FindGameObjectWithTag("light");
-        Debug.Log("I'm in Attack right now");
+        Debug.Log("Attack");
         base.Enter();
     }
     public override void Update()
     {
-        if (light.target != null)
+
+        if ((agent.transform.position - player.transform.position).magnitude < 2)
         {
-            agent.SetDestination(light.target.transform.position);
+            Debug.Log("Hit the player");
+            nextState = new Chase(npc, agent, anim, player);
+            stage = EVENT.EXIT;
+        }
 
-            if ((agent.transform.position - light.target.transform.position).magnitude < 1)
-            {
-                light.target.GetComponent<Light>().enabled = false;
-                nextState = new Idle(npc, agent, anim, player);
-                stage = EVENT.EXIT;
-
-            }
+       else
+        {
+            nextState = new Chase(npc, agent, anim, player);
+            stage = EVENT.EXIT;
         }
 
 
