@@ -40,7 +40,11 @@ public class Chase : State
 
         else if (light.target != null)
         {
-            agent.SetDestination(light.target.transform.position);
+            if ((agent.transform.position - light.target.transform.position).magnitude < 10)
+            {
+                agent.SetDestination(light.target.transform.position);
+
+            }
 
             if ((agent.transform.position - light.target.transform.position).magnitude < 1)
             {

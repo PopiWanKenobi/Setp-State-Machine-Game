@@ -18,7 +18,7 @@ public class DecideLight : MonoBehaviour
 
 
 
-    private void Update()
+    private void LateUpdate()
     {
         DetermineOnLight();
     }
