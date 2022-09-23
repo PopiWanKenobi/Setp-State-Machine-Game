@@ -3,7 +3,14 @@ guid: f7a7b66413e6c0d4e94d528a015a82f0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - navPointsParent: {instanceID: 0}
+  - target: {instanceID: 0}
+  - enemyToChase: {instanceID: 0}
+  - destination: {instanceID: 0}
+  - agent: {instanceID: 0}
+  - newNavPoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
