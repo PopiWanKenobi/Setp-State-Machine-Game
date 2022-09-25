@@ -16,9 +16,9 @@ public class SImpleStateMachine : MonoBehaviour
         Sleep,
         Scout,
         Patrol,
-        Chase,
-        Reproduce, 
-        Flee
+        Chase, 
+        Flee, 
+        Attack,
     }
 
     public float scoutTimer = 3f;
@@ -46,7 +46,6 @@ public class SImpleStateMachine : MonoBehaviour
     public GameObject lightDecider;
     public GameObject glowObj;
     public new DecideLight light;
-
 
     private bool MoveToTarget()
     {
@@ -121,7 +120,7 @@ public class SImpleStateMachine : MonoBehaviour
 
     void CheckTransitions()
     {
-        if (CheckIfInRange("enemy") && hasReproduced)
+        if (CheckIfInRange("enemy"))
         {
             if (otherIsLarger())
             {
@@ -143,15 +142,6 @@ public class SImpleStateMachine : MonoBehaviour
                 }
 
             }
-            if (currentState == State.Patrol)
-            {
-                if (patrolTimer < 0)
-                {
-                    currentState = State.Reproduce;
-                    patrolTimer = 3;
-                }
-            }
-            
         }
         
     }
@@ -159,13 +149,6 @@ public class SImpleStateMachine : MonoBehaviour
     {
         switch (currentState)
         {
-            case State.Reproduce: 
-                {
-                    GameObject child = Instantiate(gameObject, transform.position, transform.rotation);
-                    child.transform.tag = "child";
-                    reproduceTimer = 10;
-                }
-                break;
 
             case State.Chase:
                 {
@@ -173,8 +156,8 @@ public class SImpleStateMachine : MonoBehaviour
                     lightDecider = GameObject.FindGameObjectWithTag("lightTracker");
                     light = lightDecider.GetComponent<DecideLight>();
 
-                    speed = 3f;
-                    ChangeColor(Color.red);
+                    speed = 5f;
+                    ChangeColor(Color.blue);
                     bool caught = MoveToTarget();
                     if (caught)
                     {
@@ -186,7 +169,7 @@ public class SImpleStateMachine : MonoBehaviour
             case State.Patrol:
                 {
                     speed = 1f;
-                    ChangeColor(Color.blue);
+                    ChangeColor(Color.green);
                     patrolTimer -= Time.deltaTime;
                 }
                 break;
@@ -202,7 +185,7 @@ public class SImpleStateMachine : MonoBehaviour
             case State.Scout:
                 {
                     speed = .8f;
-                    ChangeColor(Color.green);
+                    ChangeColor(Color.black);
                     scoutTimer -= Time.deltaTime;
                 }
                 break;

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KB
-{
     public class PlayerStats : CharacterStats
     {
 
@@ -34,6 +32,7 @@ namespace KB
         public void TakeDamage(int damage)
         {
             currentHealth = currentHealth - damage;
+            Debug.Log("Player has been attacked");
 
             healthBar.SetCurrentHealth(currentHealth);
 
@@ -44,6 +43,6 @@ namespace KB
             }
         }
     }
-}
+
 
 

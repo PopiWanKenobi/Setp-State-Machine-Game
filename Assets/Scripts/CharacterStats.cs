@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace KB
-{
     public class CharacterStats : MonoBehaviour
     {
         public int healthLevel;
@@ -13,5 +11,4 @@ namespace KB
         public int maxStamina;
         public int currentStamina;
     }
-}
 

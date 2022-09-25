@@ -1,23 +1,24 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : State {
+public class FleeState : State
+{
+    public FleeState(StateController stateController) : base(stateController)
+    {
+    }
 
-
-    public PatrolState(StateController stateController) : base(stateController) { }
-   
     public override void CheckTransitions()
     {
-        if (stateController.CheckIfInRange("Player"))
+        if (stateController.CheckIfInRange("navpoint"))
         {
-            stateController.SetState(new ChaseState(stateController));
+            stateController.hasAttacked = false;
+            stateController.SetState(new PatrolState(stateController));
         }
-        
     }
     public override void Act()
     {
-        if(stateController.destination == null || stateController.ai.DestinationReached())
+        if (stateController.destination == null || stateController.ai.DestinationReached())
         {
             stateController.destination = stateController.GetNextNavPoint();
             stateController.ai.SetTarget(stateController.destination);
@@ -28,10 +29,9 @@ public class PatrolState : State {
         stateController.destination = stateController.GetNextNavPoint();
         if (stateController.ai.agent != null)
         {
-            stateController.ai.agent.speed = 1f;
+            stateController.ai.agent.speed = 3.5f;
         }
         stateController.ai.SetTarget(stateController.destination);
-        stateController.ChangeColor(Color.blue);
+        stateController.ChangeColor(Color.yellow);
     }
-
 }

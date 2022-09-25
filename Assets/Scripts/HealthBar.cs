@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KB 
-{
     public class HealthBar : MonoBehaviour
     {
         public Slider slider;
@@ -25,4 +23,3 @@ namespace KB
             slider.value = currentHealth;
         }
     }
-}

@@ -8,9 +8,9 @@ public class ChaseState : State {
 
     public override void CheckTransitions()
     {
-        if (!stateController.CheckIfInRange("Player"))
+        if(stateController.CheckIfInRange("Player"))
         {
-            stateController.SetState(new WanderState(stateController));
+            stateController.SetState(new AttackState(stateController));
         }
     }
     public override void Act()
@@ -23,7 +23,7 @@ public class ChaseState : State {
     }
     public override void OnStateEnter()
     {
-        stateController.ChangeColor(Color.red);
-        stateController.ai.agent.speed = .5f;
+        stateController.ChangeColor(Color.blue);
+        stateController.ai.agent.speed = 2f;
     }
 }

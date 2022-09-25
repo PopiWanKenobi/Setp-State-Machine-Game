@@ -9,15 +9,17 @@ public class StateController : MonoBehaviour {
     public State currentState;
     public GameObject[] navPoints;
     public GameObject enemyToChase;
-    public int navPointNum;
+    public int navPointNum = 0;
     public float remainingDistance;
     public Transform destination;
     public UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
     public Renderer[] childrenRend;
     public GameObject[] enemies;
-    public float detectionRange = 5;
+    public float detectionRange;
     public GameObject wanderP;
     public GameObject newNavPoint;
+    public int damage = 25;
+    public bool hasAttacked = false;
 
     [Header("A.I Settings")]
     public float maximumDetectionAngle = 50;
@@ -72,7 +74,7 @@ public class StateController : MonoBehaviour {
     }
     public bool CheckIfInRange(string tag)
     {
-        enemies = GameObject.FindGameObjectsWithTag("Player");
+        enemies = GameObject.FindGameObjectsWithTag(tag);
         if (enemies != null)
         {
             foreach (GameObject g in enemies)
@@ -113,5 +115,16 @@ public class StateController : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, fovLine1);
         Gizmos.DrawRay(transform.position, fovLine2);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerStats playerStats = other.GetComponent<PlayerStats>();
+
+        if (playerStats != null)
+        {
+            playerStats.TakeDamage(damage);
+            hasAttacked = true;
+        }
     }
 }

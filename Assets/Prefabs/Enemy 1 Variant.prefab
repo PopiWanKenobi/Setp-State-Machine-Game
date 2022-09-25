@@ -114,6 +114,7 @@ PrefabInstance:
     - {fileID: 9136252881638814910, guid: f927cabfad344e9499de6d186adaa3c7, type: 3}
     - {fileID: 9136252881638814911, guid: f927cabfad344e9499de6d186adaa3c7, type: 3}
     - {fileID: 9136252881638814880, guid: f927cabfad344e9499de6d186adaa3c7, type: 3}
+    - {fileID: 4038685995322017039, guid: f927cabfad344e9499de6d186adaa3c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f927cabfad344e9499de6d186adaa3c7, type: 3}
 --- !u!1 &7849198686160008938 stripped
 GameObject:
@@ -167,26 +168,6 @@ MonoBehaviour:
     type: 3}
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
---- !u!114 &1034362642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7849198686160008938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
 --- !u!114 &1034362643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +211,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 3.5
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
