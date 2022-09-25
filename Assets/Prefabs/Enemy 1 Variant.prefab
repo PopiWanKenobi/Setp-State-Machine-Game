@@ -166,6 +166,9 @@ MonoBehaviour:
   wanderP: {fileID: 7485622208908779925, guid: 167c64a07878142489699891a083eac0, type: 3}
   newNavPoint: {fileID: 1609180972353464, guid: 3726c3fd05f4f44428ac6d2fe45939af,
     type: 3}
+  damage: 25
+  hasAttacked: 0
+  canAttack: 0
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
 --- !u!114 &1034362643
@@ -223,16 +226,3 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5196528737513422248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7849198686160008938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb67764ed8962474d806ff8760f10e01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 25

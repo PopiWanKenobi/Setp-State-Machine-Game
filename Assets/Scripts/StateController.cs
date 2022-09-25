@@ -19,7 +19,8 @@ public class StateController : MonoBehaviour {
     public GameObject wanderP;
     public GameObject newNavPoint;
     public int damage = 25;
-    public bool hasAttacked = false;
+    public bool hasAttacked;
+    public bool canAttack;
 
     [Header("A.I Settings")]
     public float maximumDetectionAngle = 50;
@@ -31,6 +32,8 @@ public class StateController : MonoBehaviour {
         ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
         childrenRend = GetComponentsInChildren<Renderer>();
         SetState(new PatrolState(this));
+        hasAttacked = false;
+        canAttack = true;
     }
 
     void Update()
@@ -119,12 +122,16 @@ public class StateController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerStats playerStats = other.GetComponent<PlayerStats>();
-
-        if (playerStats != null)
+        if(canAttack == true)
         {
-            playerStats.TakeDamage(damage);
-            hasAttacked = true;
+            PlayerStats playerStats = other.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(damage);
+                hasAttacked = true;
+                canAttack = false;
+            }
         }
+        
     }
 }

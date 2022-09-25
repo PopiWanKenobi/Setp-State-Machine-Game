@@ -13,6 +13,7 @@ public class FleeState : State
         if (stateController.CheckIfInRange("navpoint"))
         {
             stateController.hasAttacked = false;
+            stateController.canAttack = true;
             stateController.SetState(new PatrolState(stateController));
         }
     }
