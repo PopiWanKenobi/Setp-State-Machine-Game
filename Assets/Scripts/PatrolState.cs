@@ -25,7 +25,7 @@ public class PatrolState : State {
     }
     public override void OnStateEnter()
     {
-        stateController.destination = stateController.GetNextNavPoint();
+        //stateController.destination = stateController.GetNextNavPoint();
         if (stateController.ai.agent != null)
         {
             stateController.ai.agent.speed = .5f;
