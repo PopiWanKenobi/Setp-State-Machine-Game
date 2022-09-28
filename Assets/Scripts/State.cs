@@ -1,52 +1,24 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class State
-{
-    public enum STATE
-    {
-        IDLE, PATROL, CHASE, ATTACK, SLEEP
-    };
-    public enum EVENT
-    {
-        ENTER, UPDATE, EXIT
-    };
-    public STATE name;
-    protected EVENT stage;
-    protected GameObject npc;
-    protected Animator anim;
-    protected Transform player;
-    protected State nextState;
-    protected NavMeshAgent agent;
+public abstract class State {
 
-    float visDist = 10f;
-    float visAngle = 30f;
-    float shootDist = 7f;
-
-    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
+    protected StateController stateController;
+    //constructor
+    public State(StateController stateController)
     {
-        npc = _npc;
-        agent = _agent;
-        anim = _anim;
-        stage = EVENT.ENTER;
-        player = _player;
+        this.stateController = stateController;
     }
-    public virtual void Enter() { stage = EVENT.UPDATE; }
-    public virtual void Update() { stage = EVENT.UPDATE; }
-    public virtual void Exit() { stage = EVENT.EXIT; }
+    public abstract void CheckTransitions();
 
-    public State Process()
-    {
-        if (stage == EVENT.ENTER) Enter();
-        if (stage == EVENT.UPDATE) Update();
-        if (stage == EVENT.EXIT)
-        {
-            Exit();
-            return nextState;
-        }
-        return this;
-    }
+    public abstract void Act();
+
+    public virtual void OnStateEnter() { }
+
+    public virtual void OnStateExit() { }
+
+
+
+	
 }
-

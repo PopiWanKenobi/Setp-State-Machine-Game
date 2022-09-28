@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Chase : State
+public class Chase 
 {
-    public GameObject glowObj;
+    /*public GameObject glowObj;
     public GameObject lightDecider;
     public DecideLight light;
 
@@ -40,11 +40,7 @@ public class Chase : State
 
         else if (light.target != null)
         {
-            if ((agent.transform.position - light.target.transform.position).magnitude < 10)
-            {
-                agent.SetDestination(light.target.transform.position);
-
-            }
+            agent.SetDestination(light.target.transform.position);
 
             if ((agent.transform.position - light.target.transform.position).magnitude < 1)
             {
@@ -66,5 +62,5 @@ public class Chase : State
     {
         // anim.ResetTrigger("isWalking"); //takes out any sitting animations that didnt run
         base.Exit();
-    }
+    }*/
 }
