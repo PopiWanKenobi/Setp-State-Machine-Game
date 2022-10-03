@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -28,10 +30,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-
+		public NavMeshAgent agent;
 
 		void Start()
 		{
+			agent = gameObject.GetComponent<NavMeshAgent>();
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();

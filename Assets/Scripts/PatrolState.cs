@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PatrolState : State {
 
@@ -18,8 +19,7 @@ public class PatrolState : State {
         }
         if (light.target != null)
         {
-            //Debug.Log("light on, swapped to chase");
-            //stateController.SetState(new ChaseState(stateController));
+
             if ((stateController.transform.position - light.target.transform.position).magnitude < 10)
             {
                 stateController.SetState(new ChaseState(stateController));
@@ -40,14 +40,17 @@ public class PatrolState : State {
     {
         lightDecider = GameObject.FindGameObjectWithTag("lightTracker");
         light = lightDecider.GetComponent<DecideLight>();
+
         //stateController.destination = stateController.GetNextNavPoint();
-        
-        if (stateController.ai.agent != null)
-        {
-            stateController.ai.agent.speed = .5f;
-        }
+
+ 
+        stateController.agent.speed = .5f;
+ 
+
         stateController.ai.SetTarget(stateController.destination);
         stateController.ChangeColor(Color.green);
+
+
     }
 
 }

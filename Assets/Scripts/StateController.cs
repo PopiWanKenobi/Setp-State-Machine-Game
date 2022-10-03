@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class StateController : MonoBehaviour {
 
@@ -21,16 +22,25 @@ public class StateController : MonoBehaviour {
     public int damage = 25;
     public bool hasAttacked;
     public bool canAttack;
+    public NavMeshAgent agent;
 
     [Header("A.I Settings")]
     public float maximumDetectionAngle = 50;
     public float minimumDetectionAngle = -50;
 
+    //public UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
+
+
 
     void Start()
     {
         ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
+        agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+
+
+
         childrenRend = GetComponentsInChildren<Renderer>();
+        agent.speed = .5f;
         SetState(new PatrolState(this));
         hasAttacked = false;
         canAttack = true;

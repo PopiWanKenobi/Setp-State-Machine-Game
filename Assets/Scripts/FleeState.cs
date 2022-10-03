@@ -14,7 +14,19 @@ public class FleeState : State
         {
             stateController.hasAttacked = false;
             stateController.canAttack = true;
-            stateController.SetState(new PatrolState(stateController));
+
+            if (!stateController.CheckIfInRange("Player"))
+            {
+                stateController.SetState(new PatrolState(stateController));
+            }
+            else
+            {
+            stateController.destination = stateController.GetNextNavPoint();
+
+            }
+
+
+
         }
     }
     public override void Act()
