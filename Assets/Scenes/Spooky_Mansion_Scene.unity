@@ -4581,9 +4581,9 @@ Transform:
   m_LocalPosition: {x: 12.993218, y: 1.321, z: -9.823954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1450611158}
   - {fileID: 1016515130}
   - {fileID: 592049430}
-  - {fileID: 1450611158}
   - {fileID: 833145806}
   - {fileID: 1349494094}
   m_Father: {fileID: 0}
@@ -7639,7 +7639,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1710548084
 MeshCollider:
