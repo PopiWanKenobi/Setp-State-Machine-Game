@@ -6,6 +6,7 @@ public class ChaseState : State {
     public GameObject glowObj;
     public GameObject lightDecider;
     public DecideLight light;
+    
 
     public ChaseState(StateController stateController) : base(stateController) { }
 
@@ -32,7 +33,8 @@ public class ChaseState : State {
             if ((stateController.transform.position - light.target.transform.position).magnitude < 2)
             {
                 light.target.GetComponent<Light>().enabled = false;
-                light.target.GetComponent<CapsuleCollider>().enabled = false;
+                light.target.GetComponent<BoxCollider>().enabled = false;
+                
 
                 stateController.destination = null;
                 stateController.SetState(new PatrolState(stateController));
