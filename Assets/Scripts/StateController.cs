@@ -53,7 +53,9 @@ public class StateController : MonoBehaviour {
     }
     public Transform GetNextNavPoint()
     {
-        navPointNum = (navPointNum + 1) % navPoints.Length;
+        navPointNum += 1;
+        if (navPointNum >= navPoints.Length) navPointNum = 0;
+        //navPointNum = (navPointNum + 1) % navPoints.Length;
         return navPoints[navPointNum].transform;
     }
     public Transform GetWanderPoint()
