@@ -46,7 +46,7 @@ public class PatrolState : State {
  
         stateController.agent.speed = .5f;
  
-
+        
         stateController.ai.SetTarget(stateController.destination);
         stateController.ChangeColor(Color.green);
 
