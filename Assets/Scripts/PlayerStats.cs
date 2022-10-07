@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-    public class PlayerStats : CharacterStats
-    {
+using UnityEngine.SceneManagement;
+public class PlayerStats : CharacterStats
+{
 
         public HealthBar healthBar;
         //public StaminaBar staminaBar;
@@ -38,11 +38,16 @@ using UnityEngine;
 
             if(currentHealth <= 0)
             {
-                currentHealth = 0;
-                //handle player dealth
+                Debug.Log("You died foo");
+                LoadScene("GUI");
             }
         }
-    }
+
+        public void LoadScene(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+}
 
 
 
