@@ -8,12 +8,13 @@ public class StateController : MonoBehaviour {
 
     public GameObject navPointsParent;
     public State currentState;
+
     public GameObject[] navPoints;
     public GameObject enemyToChase;
     public int navPointNum = 0;
     public float remainingDistance;
-    public Transform destination;
-    public UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
+    public Vector3 destination;
+    public NavMeshAgent ai;
     public Renderer[] childrenRend;
     public GameObject[] enemies;
     public float detectionRange;
@@ -23,6 +24,7 @@ public class StateController : MonoBehaviour {
     public bool hasAttacked;
     public bool canAttack;
     public NavMeshAgent agent;
+    public GameObject player;
 
     [Header("A.I Settings")]
     public float maximumDetectionAngle = 50;
@@ -34,14 +36,15 @@ public class StateController : MonoBehaviour {
 
     void Start()
     {
-        ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
-        agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+        ai = GetComponent<NavMeshAgent>();
+        SetState(new PatrolState(this));
+
+        //agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
 
 
 
         childrenRend = GetComponentsInChildren<Renderer>();
-        agent.speed = .5f;
-        SetState(new PatrolState(this));
+        //agent.speed = .5f;
         hasAttacked = false;
         canAttack = true;
     }
@@ -51,50 +54,26 @@ public class StateController : MonoBehaviour {
         currentState.CheckTransitions();
         currentState.Act();
     }
-    public Transform GetNextNavPoint()
+    public Vector3 GetNextNavPoint()
     {
         navPointNum += 1;
         if (navPointNum >= navPoints.Length) navPointNum = 0;
+        destination = navPoints[navPointNum].transform.position;
+        return navPoints[navPointNum].transform.position;
+
         //navPointNum = (navPointNum + 1) % navPoints.Length;
-        return navPoints[navPointNum].transform;
     }
-    public Transform GetWanderPoint()
-    {
-        Vector3 wanderPoint = new Vector3(Random.Range(-2f, 2f), 1.5f, Random.Range(-2f, 2f));
-        GameObject go = Instantiate(wanderP, wanderPoint, Quaternion.identity);
-        return go.transform;
-    }
-    public Vector3 GetRandomPoint()
-    {
-        Vector3 ran = new Vector3(Random.Range(-detectionRange, detectionRange), 1.5f, Random.Range(-detectionRange, detectionRange));
-        return ran;
-    }
+    
 
-    public void AddNavPoint(Vector3 pos)
-    {
-        GameObject go = Instantiate(newNavPoint, pos, Quaternion.identity);
-        go.transform.SetParent(navPointsParent.transform);
-       
-    }
-
-    public void ChangeColor(Color color)
-    {
-        foreach(Renderer r in childrenRend)
-        {
-            foreach(Material m in r.materials)
-            {
-                m.color = color;
-            }
-        }
-    }
     public bool CheckIfInRange(string tag)
     {
+        
         enemies = GameObject.FindGameObjectsWithTag(tag);
         if (enemies != null)
         {
             foreach (GameObject g in enemies)
             {
-                if (Vector3.Distance(g.transform.position, transform.position) < detectionRange)
+                if (Vector3.Distance(g.transform.position, ai.transform.position) < detectionRange)
                 {
                     enemyToChase = g;
                     return true;
@@ -131,12 +110,21 @@ public class StateController : MonoBehaviour {
         Gizmos.DrawRay(transform.position, fovLine1);
         Gizmos.DrawRay(transform.position, fovLine2);
     }
-
-    private void OnTriggerEnter(Collider other)
+    public void ChangeColor(Color color)
+    {
+        foreach (Renderer r in childrenRend)
+        {
+            foreach (Material m in r.materials)
+            {
+                m.color = color;
+            }
+        }
+    }
+    public void AttackPlayer()
     {
         if(canAttack == true)
         {
-            PlayerStats playerStats = other.GetComponent<PlayerStats>();
+            PlayerStats playerStats = player.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
                 playerStats.TakeDamage(damage);
@@ -147,3 +135,24 @@ public class StateController : MonoBehaviour {
         
     }
 }
+
+
+/*public Transform GetWanderPoint()
+{
+    Vector3 wanderPoint = new Vector3(Random.Range(-2f, 2f), 1.5f, Random.Range(-2f, 2f));
+    GameObject go = Instantiate(wanderP, wanderPoint, Quaternion.identity);
+    return go.transform;
+}
+public Vector3 GetRandomPoint()
+{
+    Vector3 ran = new Vector3(Random.Range(-detectionRange, detectionRange), 1.5f, Random.Range(-detectionRange, detectionRange));
+    return ran;
+}
+
+public void AddNavPoint(Vector3 pos)
+{
+    GameObject go = Instantiate(newNavPoint, pos, Quaternion.identity);
+    go.transform.SetParent(navPointsParent.transform);
+
+}*/
+

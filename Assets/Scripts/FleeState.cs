@@ -31,20 +31,20 @@ public class FleeState : State
     }
     public override void Act()
     {
-        if (stateController.destination == null || stateController.ai.DestinationReached())
+        if (stateController.destination == null || Vector3.Distance(stateController.ai.transform.position, stateController.destination) < 2)
         {
             stateController.destination = stateController.GetNextNavPoint();
-            stateController.ai.SetTarget(stateController.destination);
+            stateController.ai.SetDestination(stateController.destination);
         }
     }
     public override void OnStateEnter()
     {
         //stateController.destination = stateController.GetNextNavPoint();
-        if (stateController.ai.agent != null)
+        if (stateController.ai != null)
         {
-            stateController.ai.agent.speed = 3.5f;
+            stateController.ai.speed = 2f;
         }
-        stateController.ai.SetTarget(stateController.destination);
+        stateController.ai.SetDestination(stateController.destination);
         stateController.ChangeColor(Color.yellow);
     }
 }

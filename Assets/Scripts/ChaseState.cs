@@ -12,50 +12,59 @@ public class ChaseState : State {
 
     public override void CheckTransitions()
     {
-        if(stateController.CheckIfInRange("Player"))
+        if(Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) < stateController.detectionRange / 2)
         {
             stateController.SetState(new AttackState(stateController));
         }
     }
     public override void Act()
     {
-        if(stateController.enemyToChase != null)
+        if (Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) < 10)
         {
-            stateController.destination = stateController.enemyToChase.transform;
-            stateController.ai.SetTarget(stateController.destination);
+            stateController.destination = stateController.player.transform.position;
+            stateController.ai.SetDestination(stateController.destination);
         }
-        else if (light.target != null)
+        else if (light.target != null && Vector3.Distance(stateController.ai.transform.position, light.target.transform.position) < stateController.detectionRange * 2)
         {
             Debug.Log("should be going after the light");
-            stateController.destination = light.target.transform;
-            stateController.ai.SetTarget(stateController.destination);
+            stateController.destination = light.target.transform.position;
+            stateController.ai.SetDestination(stateController.destination);
 
-            if ((stateController.transform.position - light.target.transform.position).magnitude < 2)
+            if (Vector3.Distance(stateController.ai.transform.position, light.target.transform.position) < 1)
             {
                 light.target.GetComponent<Light>().enabled = false;
                 light.target.GetComponent<BoxCollider>().enabled = false;
-                
 
-                stateController.destination = null;
+
+                stateController.destination = stateController.GetNextNavPoint();
                 stateController.SetState(new PatrolState(stateController));
 
             }
 
-            if (light.target.GetComponent<Light>().enabled == false) 
+            if (light.target.GetComponent<Light>().enabled == false)
             {
-                stateController.destination = null;
+                stateController.destination = stateController.GetNextNavPoint();
                 stateController.SetState(new PatrolState(stateController));
-                
+
             }
 
 
         }
+        else 
+        {
+            stateController.destination = stateController.GetNextNavPoint();
+            stateController.SetState(new PatrolState(stateController));
+
+        
+        } 
+
     }
 
     public override void OnStateEnter()
     {
         stateController.ChangeColor(Color.blue);
-        stateController.ai.agent.speed = 2f;
+        stateController.ai.speed = 4f;
+
         lightDecider = GameObject.FindGameObjectWithTag("lightTracker");
         light = lightDecider.GetComponent<DecideLight>();
     }

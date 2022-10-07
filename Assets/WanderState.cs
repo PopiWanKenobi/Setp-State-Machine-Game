@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderState : State
+/*public class WanderState : State
 {
 
 
@@ -43,4 +43,4 @@ public class WanderState : State
         stateController.ai.SetTarget(stateController.destination);
         stateController.ChangeColor(Color.cyan);
     }
-}
+}*/

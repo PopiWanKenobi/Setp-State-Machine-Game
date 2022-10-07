@@ -9,7 +9,7 @@ public class AttackState : State
 
         public override void CheckTransitions()
         {
-            if (!stateController.CheckIfInRange("Player"))
+            if (Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) > stateController.detectionRange)
             {
                 stateController.SetState(new PatrolState(stateController));
             }
@@ -22,15 +22,17 @@ public class AttackState : State
 
         public override void Act()
         {
-            if(stateController.enemyToChase != null)
-            {
-                stateController.destination = stateController.enemyToChase.transform;
-                stateController.ai.SetTarget(stateController.destination);
-            }
+
+                stateController.destination = stateController.player.transform.position;
+                stateController.ai.SetDestination(stateController.destination);
+
+               if (Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) < 1) stateController.AttackPlayer();
+            
         }
 
         public override void OnStateEnter()
         {
+            stateController.ai.speed = 4;
             stateController.ChangeColor(Color.red);
         }
 }

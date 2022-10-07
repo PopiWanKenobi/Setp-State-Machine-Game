@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class MakeNavPoints : State {
 
     public MakeNavPoints(StateController stateController) : base(stateController) { }
@@ -37,3 +37,4 @@ public class MakeNavPoints : State {
         stateController.ai.agent.speed = 2f;
     }
 }
+*/
