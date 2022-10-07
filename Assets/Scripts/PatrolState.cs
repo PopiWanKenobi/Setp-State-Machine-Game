@@ -19,7 +19,7 @@ public class PatrolState : State {
 
             stateController.SetState(new ChaseState(stateController));
         }
-        if (light.target != null && Vector3.Distance(stateController.ai.transform.position, light.target.transform.position) < stateController.detectionRange * 2)
+        if (light.target != null && Vector3.Distance(stateController.ai.transform.position, light.target.transform.position) < stateController.detectionRange)
         {
 
                 stateController.SetState(new ChaseState(stateController));
@@ -30,14 +30,14 @@ public class PatrolState : State {
     }
     public override void Act()
     {
-        if (light.target != null)
+        /*if (light.target != null)
         {
             stateController.destination = light.target.transform.position;
             stateController.ai.SetDestination(stateController.destination);
 
-        }
+        }*/
 
-        else if (stateController.destination == null || Vector3.Distance(stateController.ai.transform.position, stateController.destination) < 2 )
+        if (stateController.destination == null || Vector3.Distance(stateController.ai.transform.position, stateController.destination) < 2 )
         {
             stateController.destination = stateController.GetNextNavPoint();
             stateController.ai.SetDestination(stateController.destination);
@@ -57,7 +57,7 @@ public class PatrolState : State {
  
         
         stateController.ai.SetDestination(stateController.destination);
-        stateController.ChangeColor(Color.green);
+        //stateController.ChangeColor(Color.green);
 
 
     }

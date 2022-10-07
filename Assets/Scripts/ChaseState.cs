@@ -19,14 +19,13 @@ public class ChaseState : State {
     }
     public override void Act()
     {
-        if (Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) < 10)
+        if (Vector3.Distance(stateController.ai.transform.position, stateController.player.transform.position) < stateController.detectionRange)
         {
             stateController.destination = stateController.player.transform.position;
             stateController.ai.SetDestination(stateController.destination);
         }
         else if (light.target != null && Vector3.Distance(stateController.ai.transform.position, light.target.transform.position) < stateController.detectionRange * 2)
         {
-            Debug.Log("should be going after the light");
             stateController.destination = light.target.transform.position;
             stateController.ai.SetDestination(stateController.destination);
 
@@ -62,7 +61,7 @@ public class ChaseState : State {
 
     public override void OnStateEnter()
     {
-        stateController.ChangeColor(Color.blue);
+        //stateController.ChangeColor(Color.blue);
         stateController.ai.speed = 4f;
 
         lightDecider = GameObject.FindGameObjectWithTag("lightTracker");

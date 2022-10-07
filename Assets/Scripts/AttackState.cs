@@ -33,6 +33,6 @@ public class AttackState : State
         public override void OnStateEnter()
         {
             stateController.ai.speed = 4;
-            stateController.ChangeColor(Color.red);
+            //stateController.ChangeColor(Color.red);
         }
 }

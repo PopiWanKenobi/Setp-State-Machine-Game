@@ -45,6 +45,6 @@ public class FleeState : State
             stateController.ai.speed = 2f;
         }
         stateController.ai.SetDestination(stateController.destination);
-        stateController.ChangeColor(Color.yellow);
+        //stateController.ChangeColor(Color.yellow);
     }
 }
